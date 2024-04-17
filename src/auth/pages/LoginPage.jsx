@@ -25,6 +25,8 @@ export const LoginPage = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault()
+
+    console.log({ email, password});
     dispatch( startLoginWithEmailPassword({email, password}) )
     
   }
@@ -35,7 +37,10 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title='Login'>
-      <form onSubmit={ handleSubmit } className='animate__animated animate__fadeIn animate__faster'
+      <form
+        aria-label='submit-form' 
+        onSubmit={ handleSubmit } 
+        className='animate__animated animate__fadeIn animate__faster'
 >
         <Grid container> 
           <Grid item xs={12} sx={{ mt:2 }}>
@@ -54,6 +59,9 @@ export const LoginPage = () => {
             placeholder='Contraseña'
             fullWidth 
             name='password'
+            inputProps={{
+              'data-testid': 'password'
+            }}
             value={ password }
             onChange={ onInputChange }/>
           </Grid>
@@ -86,7 +94,8 @@ export const LoginPage = () => {
             </Grid>
 
             <Grid item xs={ 12 } md={ 6 }>
-              <Button 
+              <Button
+                aria-label='google-btn' 
                 disabled = { isAuthenticating } 
                 onClick={ onGoogleSignIn } 
                 variant='contained' 
